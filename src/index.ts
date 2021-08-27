@@ -17,6 +17,9 @@ import { getLatestGauntlets, getGauntletById } from './resources/requests/get/ge
 // POST route-handler imports
 import { newGauntletHandler } from './resources/requests/post/newGauntlet'
 
+// DELETE route-handler imports
+import { delGauntlet } from './resources/requests/delete/delGauntlet'
+
 // --------------------------------------------------
 // Variables 
 // --------------------------------------------------
@@ -43,13 +46,18 @@ generateNewLogFile();
 // GET Handlers 
 // --------------------------------------------------
 app.get('/debug/ping', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } pingHandler(req, res), log.getLog("/ping from IP " + req.ip) });
-app.get('/api/gauntlets/getPrevious', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } getLatestGauntlets(req, res), log.getLog("/api/gauntlet/getPrevious from IP " + req.ip) });
-app.get('/api/gauntlets/getGauntletByID', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } getGauntletById(req, res), log.getLog("/api/gauntlet/getGauntletByID from IP " + req.ip) });
+app.get('/gauntlets/getPrevious', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } getLatestGauntlets(req, res), log.getLog("/gauntlet/getPrevious from IP " + req.ip) });
+app.get('/gauntlets/getGauntletByID', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } getGauntletById(req, res), log.getLog("/gauntlet/getGauntletByID from IP " + req.ip) });
 
 // --------------------------------------------------
 // POST Handlers 
 // --------------------------------------------------
-app.post('/api/gauntlets/new', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } newGauntletHandler(req, res), log.getLog("/api/gauntlet/new from IP " + req.ip) });
+app.post('/gauntlets/post', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } newGauntletHandler(req, res), log.postLog("/gauntlet/new from IP " + req.ip) });
+
+// --------------------------------------------------
+// DELETE Handlers
+// --------------------------------------------------
+app.delete('/gauntlets/delete', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } delGauntlet(req, res), log.deleteLog("/gauntlet/delete from IP " + req.ip) });
 
 // --------------------------------------------------
 // HTTP/HTTPS Server Creator

@@ -23,6 +23,10 @@ export class Loggers {
         console.log(`${colors.green(this.getTimeFormat())} ${colors.bgBlue(colors.black(' POST '))} ${colors.white(message)}`);
         fs.appendFileSync(__dirname + '/../logs/latest.log', `${this.getTimeFormat()} [POST] ${message}\n`)
     }
+    deleteLog(message: any): void {
+        console.log(`${colors.green(this.getTimeFormat())} ${colors.bgBlue(colors.black(' DELETE '))} ${colors.white(message)}`);
+        fs.appendFileSync(__dirname + '/../logs/latest.log', `${this.getTimeFormat()} [DELETE] ${message}\n`)
+    }
     warnLog(message: any): void {
         console.log(`${colors.green(this.getTimeFormat())} ${colors.bgYellow(colors.black(' WARN '))} ${colors.white(message)}`);
         fs.appendFileSync(__dirname + '/../logs/latest.log', `${this.getTimeFormat()} [WARN] ${message}\n`)

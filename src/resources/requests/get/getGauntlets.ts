@@ -13,7 +13,6 @@ export function getLatestGauntlets(req: any, res: any) {
                     .orderBy("gauntlet.id", "ASC")
                     .limit(req.query.amnt)
                     .getMany();
-                console.log(result)
                 connection.close()
                 res.status(200).send(JSON.stringify(result))
             } else {
@@ -23,7 +22,6 @@ export function getLatestGauntlets(req: any, res: any) {
                     .orderBy("gauntlet.id", "ASC")
                     .limit(10)
                     .getMany();
-                console.log(result)
                 connection.close()
                 res.status(200).send(JSON.stringify(result))
             }

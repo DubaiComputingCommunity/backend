@@ -1,4 +1,4 @@
-1) New Gauntlet (/api/gauntlet/new) 
+1) New Gauntlet (/gauntlet/post) 
 ------------------------------------
 {
     "name": "Gauntlet Name",
