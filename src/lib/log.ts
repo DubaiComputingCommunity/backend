@@ -1,10 +1,10 @@
 const moment = require('moment');
-import * as colors from 'colors';
+const colors = require('colors');
 import * as fs from 'fs';
 export class Loggers {
     getTimeFormat(): string {
         let time: string;
-        time = `[${moment().format("MMMM Do YYYY, h:mm:ss a")}]`;
+        time = `[${moment().format("MMM Do YY, h:mm:ss a")}]`
         return time;
     }
     infoLog(message: any): void {
@@ -23,6 +23,10 @@ export class Loggers {
         console.log(`${colors.green(this.getTimeFormat())} ${colors.bgBlue(colors.black(' POST '))} ${colors.white(message)}`);
         fs.appendFileSync(__dirname + '/../logs/latest.log', `${this.getTimeFormat()} [POST] ${message}\n`)
     }
+    deleteLog(message: any): void {
+        console.log(`${colors.green(this.getTimeFormat())} ${colors.bgBlue(colors.black(' DELETE '))} ${colors.white(message)}`);
+        fs.appendFileSync(__dirname + '/../logs/latest.log', `${this.getTimeFormat()} [DELETE] ${message}\n`)
+    }
     warnLog(message: any): void {
         console.log(`${colors.green(this.getTimeFormat())} ${colors.bgYellow(colors.black(' WARN '))} ${colors.white(message)}`);
         fs.appendFileSync(__dirname + '/../logs/latest.log', `${this.getTimeFormat()} [WARN] ${message}\n`)
@@ -39,7 +43,9 @@ export class Loggers {
         console.log(`${colors.green(this.getTimeFormat())} ${colors.bgGreen(colors.black(' INIT '))} ${colors.white(message)}`);
         fs.appendFileSync(__dirname + '/../logs/latest.log', `${this.getTimeFormat()} [INIT] ${message}\n`)
     }
-
+    bold(string: string) {
+        return colors.bold(string)
+    }
 }
 export class Utility {
     getLogDateName() {
