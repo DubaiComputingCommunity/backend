@@ -10,7 +10,11 @@ import * as https from 'https';
 import { Loggers, Utility } from './lib/log'; // Logger Import
 import { generateNewLogFile } from './lib/logManager';
 
+// GET route-handler imports
 import { pingHandler } from './resources/requests/get/ping'
+
+// POST route-handler imports
+import { newGauntletHandler } from './resources/requests/post/newGauntlet'
 
 // --------------------------------------------------
 // Variables 
@@ -37,19 +41,20 @@ generateNewLogFile();
 // --------------------------------------------------
 // GET Handlers 
 // --------------------------------------------------
-app.get('/ping', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } pingHandler(req, res), log.getLog("/ping from IP " + req.ip) });
+app.get('/debug/ping', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } pingHandler(req, res), log.getLog("/ping from IP " + req.ip) });
 
 // --------------------------------------------------
 // POST Handlers 
 // --------------------------------------------------
+app.post('/api/gauntlets/new', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } newGauntletHandler(req, res), log.getLog("/api/gauntlet/new from IP " + req.ip) });
 
 // --------------------------------------------------
 // HTTP/HTTPS Server Creator
 // --------------------------------------------------
 const httpServer = http.createServer(app); log.initLog("HTTP Server Created");
 const httpsServer = https.createServer({
-    key: fs.readFileSync('./resources/private/ssl/cloudflare.key', 'utf8'),
-    cert: fs.readFileSync('./resources/private/ssl/cloudflare.crt', 'utf8')
+    key: fs.readFileSync(__dirname + '/resources/private/ssl/cloudflare.key', 'utf8'),
+    cert: fs.readFileSync(__dirname + '/resources/private/ssl/cloudflare.crt', 'utf8')
 }, app); log.initLog("HTTPS Server Created");
 
 // --------------------------------------------------

@@ -1,5 +1,5 @@
 const moment = require('moment');
-import * as colors from 'colors';
+const colors = require('colors');
 import * as fs from 'fs';
 export class Loggers {
     getTimeFormat(): string {
