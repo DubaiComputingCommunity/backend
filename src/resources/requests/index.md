@@ -14,4 +14,3 @@ Gets the Gauntlet with the given ID using the "id" query parameter (url?id=1)
 
 (DELETE) /gauntlets/delete
 Deletes the Gauntlet with the given ID using the "id" query parameter (url?id=1)
-
