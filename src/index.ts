@@ -10,15 +10,7 @@ import * as https from 'https';
 import { Loggers, Utility } from './lib/log'; // Logger Import
 import { generateNewLogFile } from './lib/logManager';
 
-// GET route-handler imports
 import { pingHandler } from './resources/requests/get/ping'
-import { getLatestGauntlets, getGauntletById } from './resources/requests/get/getGauntlets'
-
-// POST route-handler imports
-import { newGauntletHandler } from './resources/requests/post/newGauntlet'
-
-// DELETE route-handler imports
-import { delGauntlet } from './resources/requests/delete/delGauntlet'
 
 // --------------------------------------------------
 // Variables 
@@ -45,27 +37,19 @@ generateNewLogFile();
 // --------------------------------------------------
 // GET Handlers 
 // --------------------------------------------------
-app.get('/debug/ping', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } pingHandler(req, res), log.getLog("/ping from IP " + req.ip) });
-app.get('/gauntlets/getPrevious', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } getLatestGauntlets(req, res), log.getLog("/gauntlet/getPrevious from IP " + req.ip) });
-app.get('/gauntlets/getGauntletByID', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } getGauntletById(req, res), log.getLog("/gauntlet/getGauntletByID from IP " + req.ip) });
+app.get('/ping', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } pingHandler(req, res), log.getLog("/ping from IP " + req.ip) });
 
 // --------------------------------------------------
 // POST Handlers 
 // --------------------------------------------------
-app.post('/gauntlets/post', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } newGauntletHandler(req, res), log.postLog("/gauntlet/new from IP " + req.ip) });
-
-// --------------------------------------------------
-// DELETE Handlers
-// --------------------------------------------------
-app.delete('/gauntlets/delete', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } delGauntlet(req, res), log.deleteLog("/gauntlet/delete from IP " + req.ip) });
 
 // --------------------------------------------------
 // HTTP/HTTPS Server Creator
 // --------------------------------------------------
 const httpServer = http.createServer(app); log.initLog("HTTP Server Created");
 const httpsServer = https.createServer({
-    key: fs.readFileSync(__dirname + '/resources/private/ssl/cloudflare.key', 'utf8'),
-    cert: fs.readFileSync(__dirname + '/resources/private/ssl/cloudflare.crt', 'utf8')
+    key: fs.readFileSync('./resources/private/ssl/cloudflare.key', 'utf8'),
+    cert: fs.readFileSync('./resources/private/ssl/cloudflare.crt', 'utf8')
 }, app); log.initLog("HTTPS Server Created");
 
 // --------------------------------------------------
