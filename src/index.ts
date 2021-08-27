@@ -91,7 +91,7 @@ log.infoLog("")
 log.infoLog("|------------[DCC Website API]------------");
 
 // Error Handler
-process.on('exit', (err) => {
+process.on('uncaughtException', (err) => {
   log.errorLog("An error was encountered, Stacktrace:")
   log.errorLog(err.toString())
   log.errorLog("")
