@@ -17,7 +17,7 @@ export function newGauntletHandler(req: any, res: any) {
             gauntlet.deleted = false;
             await connection.manager.save(gauntlet);
             log.infoLog('------------------')
-            log.infoLog("New Gauntlet saved")
+            log.infoLog(log.bold("New Gauntlet Saved"))
             log.infoLog("Name: " + req.body.name)
             log.infoLog("Description: " + req.body.description)
             log.infoLog("Rank: " + req.body.rank)

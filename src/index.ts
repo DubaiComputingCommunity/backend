@@ -12,6 +12,7 @@ import { generateNewLogFile } from './lib/logManager';
 
 // GET route-handler imports
 import { pingHandler } from './resources/requests/get/ping'
+import { getLatestGauntlets, getGauntletById } from './resources/requests/get/getGauntlets'
 
 // POST route-handler imports
 import { newGauntletHandler } from './resources/requests/post/newGauntlet'
@@ -42,6 +43,8 @@ generateNewLogFile();
 // GET Handlers 
 // --------------------------------------------------
 app.get('/debug/ping', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } pingHandler(req, res), log.getLog("/ping from IP " + req.ip) });
+app.get('/api/gauntlets/getPrevious', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } getLatestGauntlets(req, res), log.getLog("/api/gauntlet/getPrevious from IP " + req.ip) });
+app.get('/api/gauntlets/getGauntletByID', (req: any, res: any, err: any) => { if (err) { log.errorLog(err) } getGauntletById(req, res), log.getLog("/api/gauntlet/getGauntletByID from IP " + req.ip) });
 
 // --------------------------------------------------
 // POST Handlers 
